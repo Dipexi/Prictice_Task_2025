@@ -1,5 +1,6 @@
 package com.example.prictice_task_2025.entity;
 
+import com.example.prictice_task_2025.enumeration.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
@@ -26,4 +27,5 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     @OneToMany(mappedBy = "user")
     private List<Order> orders;
+    private Role role;
 }
