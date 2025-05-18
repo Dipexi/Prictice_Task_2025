@@ -62,4 +62,17 @@ public class OrderServiceImpl implements OrderService {
                 .map(orderToOrderResponseDtoConverter::convert)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteOrder(Long id) {
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Order not found with id: " + id));
+
+        orderRepository.delete(order);
+    }
+
+    @Override
+    public void deleteAllOrders() {
+        orderRepository.deleteAll();  // Удаляем все заказы
+    }
 }

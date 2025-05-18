@@ -10,4 +10,6 @@ public interface OrderService {
     OrderResponseDto getOrderById(Long id);
     List<OrderResponseDto> getAllOrders(Pageable pageable);
     List<OrderResponseDto> getOrdersByUserId(Long userId);
+    void deleteOrder(Long id);
+    void deleteAllOrders();
 }

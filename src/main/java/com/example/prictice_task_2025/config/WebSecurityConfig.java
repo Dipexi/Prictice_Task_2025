@@ -33,8 +33,17 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth ->
                         auth
                                 .requestMatchers(
-                                        "api/auth/registration",
-                                        "api/auth/login", "api/auth/token","api/auth/refresh"
+                                        "/api/auth/registration",
+                                        "/api/auth/login",
+                                        "/api/auth/token",
+                                        "/api/auth/refresh",
+                                        "/swagger-ui/**",
+                                        "/v3/api-docs/**",
+                                        "/swagger-ui.html",
+                                        "/swagger-resources/**",
+                                        "/webjars/**",
+                                        "/webjars/springfox-swagger-ui/**",
+                                        "/configuration/**"
                                 )
                                 .permitAll()
                                 .anyRequest()

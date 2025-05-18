@@ -21,7 +21,8 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class ProductServiceImpl implements ProductService {
+public class
+ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
     private final ProductRequestDtoToProductConverter productRequestDtoToProductConverter;
