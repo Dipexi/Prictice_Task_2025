@@ -30,9 +30,14 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderResponseDto createOrder(@Valid OrderRequestDto orderRequestDto) {
-        User user = userRepository.findById(orderRequestDto.getUserId()).orElseThrow(NoSuchElementException::new);
-        Order order = orderRepository.save(orderRequestDtoToOrderConverter.convert(orderRequestDto));
+        User user = userRepository.findById(orderRequestDto.getUserId())
+                .orElseThrow(NoSuchElementException::new);
+
+        Order order = orderRequestDtoToOrderConverter.convert(orderRequestDto);
         order.setUser(user);
+
+        order = orderRepository.save(order);
+
         return orderToOrderResponseDtoConverter.convert(order);
     }
 
