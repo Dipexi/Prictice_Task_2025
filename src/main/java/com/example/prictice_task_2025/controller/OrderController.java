@@ -48,4 +48,20 @@ public class OrderController {
         List<OrderResponseDto> orders = orderService.getOrdersByUserId(userId);
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteOrder(@PathVariable Long id) {
+        try {
+            orderService.deleteOrder(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/all")
+    public ResponseEntity<Void> deleteAllOrders() {
+        orderService.deleteAllOrders();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

@@ -1,4 +1,5 @@
 package com.example.prictice_task_2025.dto;
+import com.example.prictice_task_2025.enumeration.Role;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -19,4 +20,5 @@ public class UserDto {
     @NotEmpty
     private String sex;
     private LocalDate localDate;
+    private Role role;
 }

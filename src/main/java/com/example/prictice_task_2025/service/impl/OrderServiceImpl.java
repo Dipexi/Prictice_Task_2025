@@ -30,9 +30,14 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderResponseDto createOrder(@Valid OrderRequestDto orderRequestDto) {
-        User user = userRepository.findById(orderRequestDto.getUserId()).orElseThrow(NoSuchElementException::new);
-        Order order = orderRepository.save(orderRequestDtoToOrderConverter.convert(orderRequestDto));
+        User user = userRepository.findById(orderRequestDto.getUserId())
+                .orElseThrow(NoSuchElementException::new);
+
+        Order order = orderRequestDtoToOrderConverter.convert(orderRequestDto);
         order.setUser(user);
+
+        order = orderRepository.save(order);
+
         return orderToOrderResponseDtoConverter.convert(order);
     }
 
@@ -61,5 +66,18 @@ public class OrderServiceImpl implements OrderService {
                 .stream()
                 .map(orderToOrderResponseDtoConverter::convert)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteOrder(Long id) {
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Order not found with id: " + id));
+
+        orderRepository.delete(order);
+    }
+
+    @Override
+    public void deleteAllOrders() {
+        orderRepository.deleteAll();  // Удаляем все заказы
     }
 }

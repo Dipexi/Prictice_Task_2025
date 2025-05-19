@@ -22,6 +22,8 @@ public class OrderToOrderResponseDtoConverter implements Converter<Order, OrderR
 
         return OrderResponseDto.builder()
                 .id(source.getId())
+                .userId(source.getUser() != null ? source.getUser().getId() : (Long) null)
+                .username(source.getUser() != null ? source.getUser().getUsername() : null)
                 .orderDate(source.getOrderDate())
                 .totalAmount(source.getTotalAmount())
                 .orderItems(orderItemResponseDtos)
@@ -31,6 +33,8 @@ public class OrderToOrderResponseDtoConverter implements Converter<Order, OrderR
     private OrderItemResponseDto convertOrderItem(OrderItem orderItem) {
         return OrderItemResponseDto.builder()
                 .id(orderItem.getId())
+                .userId(orderItem.getOrder().getUser() != null ? orderItem.getOrder().getUser().getId() : (Long) null)
+                .username(orderItem.getOrder().getUser() != null ? orderItem.getOrder().getUser().getUsername() : null)
                 .quantity(orderItem.getQuantity())
                 .price(orderItem.getPrice())
                 .productResponseDto(convertProduct(orderItem.getProduct()))

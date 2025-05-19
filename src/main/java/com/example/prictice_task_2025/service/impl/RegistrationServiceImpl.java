@@ -28,7 +28,9 @@ public class RegistrationServiceImpl implements RegistrationService {
     public JWTResponse register(User user) {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
-        user.setRole(Role.USER);
+        if (user.getRole() == null) {
+            user.setRole(Role.USER);
+        }
         final String accessToken = jwtServiceImpl.generateAccessToken(user);
         final String refreshToken = jwtServiceImpl.generateRefreshToken(user);
         userRepository.save(user);
